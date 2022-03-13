@@ -1,0 +1,71 @@
+CREATE TABLE [dbo].[Enrollment]
+
+(
+
+[ID] [int] IDENTITY(1,1) NOT NULL,
+
+[UserName] [varchar](50) NULL,
+
+[UserEmail] [varchar](50) NULL,
+
+[MobileNumber] [int] NULL,
+
+[UserPassword] [nvarchar](50) NULL,
+
+[Gender] [char](15) NULL,
+
+)
+
+SET ANSI_NULLS ON
+
+GO
+
+SET QUOTED_IDENTIFIER ON
+
+GO
+
+create procedure [dbo].[SP_EnrollDetail]
+
+(
+
+@UserName varchar(50)=NULL,
+
+@UserEmail varchar(50)=NULL,
+
+@MobileNumber varchar(50)=NULL,
+
+@UserPassword varchar(10)=NULL,
+
+@Gender char(50)=NULL,
+
+@status varchar(15)
+
+)
+
+as
+
+begin
+
+if @status='Insert'
+
+begin
+
+insert into Enrollment(UserName,UserEmail,MobileNumber,UserPassword,Gender)values(@UserName,@UserEmail,@MobileNumber,@UserPassword,@Gender)
+
+end
+
+end
+
+CREATE TABLE [dbo].[Feed-back] (
+    [UserId]   INT          NOT NULL,
+    [Rating]   VARCHAR (50) NOT NULL,
+    [feedback] VARCHAR (75) NULL,
+    [Email]    VARCHAR (50) NULL,
+    PRIMARY KEY CLUSTERED ([UserId] ASC)
+);
+
+CREATE TABLE [dbo].[Login] (
+    [UserId]   INT           NULL,
+    [Password] VARCHAR (100) NULL,
+    FOREIGN KEY ([UserId]) REFERENCES [dbo].[SignUp] ([UserId])
+);
